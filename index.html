@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mihir Jagtap | BBA DBE, IIM Bangalore</title>
+  <meta name="description" content="Portfolio of Mihir Jagtap, BBA Digital Business and Entrepreneurship student at IIM Bangalore.">
+  <!-- Google Fonts: Manrope (body) + Archivo (bold, wide headlines) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112.5,800..900&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================
+   MIHIR JAGTAP PORTFOLIO - style.css
+   Sections: 1 Variables | 2 Base | 3 Layout | 4 Nav | 5 Hero
+   6 Sections | 7 Components | 8 Footer | 9 Responsive
+   ========================================================== */
+
+/* 1. VARIABLES (:root) - one place to change the whole palette */
+:root {
+  --orange: #ff5a1f;
+  --lime:   #c6ff00;
+  --black:  #0b0b0b;
+  --white:  #faf6ee;   /* warm white */
+  --cobalt: #1f4bff;
+  --font-head: "Archivo", "Arial Black", sans-serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --radius: 28px;
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+}
+
+/* 2. BASE: element selectors */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  font-family: var(--font-body);
+  font-size: 1.05rem;     /* typography: size */
+  line-height: 1.7;       /* typography: line spacing */
+  font-weight: 400;
+  background: var(--white);
+  color: var(--black);
+}
+h1, h2, h3 { font-family: var(--font-head); font-weight: 900; line-height: 0.95; text-transform: uppercase; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+p + p { margin-top: 1rem; }
+
+/* 3. LAYOUT HELPERS: class selectors */
+.container { width: min(1200px, 90%); margin-inline: auto; }
+.section { padding: 110px 0; }
+.section-dark { background: var(--black); color: var(--white); }
+.section-lime { background: var(--lime); }
+.mega { font-size: clamp(3rem, 9vw, 8rem); letter-spacing: -2px; }
+.big  { font-size: clamp(2.4rem, 6vw, 5.5rem); letter-spacing: -1px; margin-bottom: 50px; }
+.eyebrow { font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 18px; }
+.hl-orange { color: var(--orange); }
+.hl-lime   { color: var(--lime); background: var(--black); padding: 0 12px; border-radius: 12px; display: inline-block; }
+.hl-cobalt { color: var(--cobalt); }
+.hl-white  { color: var(--white); background: var(--black); padding: 0 12px; border-radius: 12px; display: inline-block; }
+.section-dark .hl-lime, .contact .hl-lime { background: none; padding: 0; }
+
+/* Buttons with hover transition */
+.btn {
+  display: inline-block; padding: 16px 34px; border-radius: 50px;
+  font-weight: 800; border: 3px solid var(--black);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.btn:hover { transform: translateY(-4px) scale(1.03); box-shadow: var(--shadow); }
+.btn-dark { background: var(--black); color: var(--white); }
+.btn-dark:hover { background: var(--orange); border-color: var(--orange); color: var(--black); }
+.btn-lime { background: var(--lime); color: var(--black); border-color: var(--lime); }
+.btn-outline { color: var(--white); border-color: var(--white); }
+.btn-outline:hover { background: var(--orange); border-color: var(--orange); }
+
+/* 4. NAVIGATION: position sticky + Flexbox */
+#site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250, 246, 238, 0.95);
+  border-bottom: 2px solid var(--black);
+}
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; position: relative; }
+.logo { font-family: var(--font-head); font-weight: 900; font-size: 2rem; }
+.logo span { color: var(--orange); }
+.nav-links { display: flex; gap: 28px; align-items: center; font-weight: 800; }
+.nav-links a { position: relative; transition: color 0.2s; }
+.nav-links a:hover { color: var(--orange); }
+.nav-cta { background: var(--black); color: var(--white); padding: 8px 20px; border-radius: 40px; }
+.nav-cta:hover { background: var(--orange); color: var(--black) !important; }
+.menu-toggle, .menu-btn { display: none; }
+
+/* 5. HERO: CSS Grid + absolute positioned shapes */
+.hero { background: var(--orange); overflow: hidden; border-bottom: 2px solid var(--black); }
+.hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; align-items: center; gap: 30px; min-height: 80vh; padding: 60px 0; }
+.hero .mega { color: var(--black); }
+.hero .hl-orange { color: var(--white); }
+.hero-name { font-size: clamp(1.4rem, 3vw, 2.4rem); margin: 22px 0 12px; }
+.lead { max-width: 480px; font-weight: 600; margin-bottom: 28px; }
+
+.hero-art { position: relative; height: 460px; }     /* relative parent */
+.shape { position: absolute; }                        /* absolute children */
+.circle { width: 280px; height: 280px; background: var(--lime); border-radius: 50%; top: 10px; right: 20px; border: 4px solid var(--black); box-shadow: var(--shadow); }
+.square { width: 200px; height: 200px; background: var(--cobalt); border-radius: var(--radius); bottom: 30px; left: 10px; transform: rotate(-12deg); border: 4px solid var(--black); animation: float 5s ease-in-out infinite; }
+.pill   { width: 260px; height: 80px; background: var(--black); border-radius: 60px; bottom: 120px; right: 0; transform: rotate(-20deg); }
+.ring   { width: 120px; height: 120px; border: 18px solid var(--white); border-radius: 50%; top: 190px; left: 70px; }
+.art-word { position: absolute; top: 120px; right: 60px; font-family: var(--font-head); font-weight: 900; font-size: 4rem; color: var(--black); transform: rotate(-90deg); transform-origin: right top; }
+@keyframes float { 0%,100% { transform: rotate(-12deg) translateY(0); } 50% { transform: rotate(-6deg) translateY(-18px); } }
+
+.marquee { background: var(--black); color: var(--lime); overflow: hidden; padding: 14px 0; }
+.marquee p { white-space: nowrap; font-family: var(--font-head); font-weight: 900; font-size: 1.3rem; display: inline-block; animation: scroll 25s linear infinite; }
+@keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* 6. ABOUT split-screen (Flexbox) */
+.split { display: flex; min-height: 70vh; border-bottom: 2px solid var(--black); }
+.split-left  { flex: 1; background: var(--lime); padding: 90px 5%; display: flex; align-items: center; }
+.split-left .big { margin: 0; }
+.split-left .hl-orange { color: var(--black); }
+.split-right { flex: 1; background: var(--black); color: var(--white); padding: 90px 5%; display: flex; flex-direction: column; justify-content: center; font-size: 1.2rem; }
+.split-right .eyebrow { color: var(--orange); }
+
+/* EDUCATION cards (Grid) */
+.edu-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.edu-card { border: 3px solid var(--black); border-radius: var(--radius); padding: 40px; background: #fff; box-shadow: 8px 8px 0 var(--black); transition: transform 0.25s, box-shadow 0.25s; }
+.edu-card:hover { transform: translate(-4px, -4px); box-shadow: 14px 14px 0 var(--orange); }
+.edu-main { background: var(--cobalt); color: var(--white); }
+.edu-card h3 { font-size: 1.8rem; margin: 18px 0 10px; }
+.tag { display: inline-block; background: var(--lime); color: var(--black); font-weight: 800; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; text-transform: uppercase; }
+
+/* SKILLS cards (Grid, auto-fit) */
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
+.skill-card { background: #1a1a1a; border: 2px solid #333; border-radius: var(--radius); padding: 30px; min-height: 220px; transition: transform 0.3s, background 0.3s, color 0.3s; }
+.skill-card:hover { background: var(--lime); color: var(--black); transform: translateY(-10px) rotate(-1.5deg); }
+.num { font-family: var(--font-head); font-size: 2.6rem; color: var(--orange); font-weight: 900; }
+.skill-card h3 { font-size: 1.3rem; margin: 20px 0 8px; }
+
+/* PROJECT featured card (Grid) */
+.project { display: grid; grid-template-columns: 1.3fr 1fr; border: 3px solid var(--black); border-radius: var(--radius); overflow: hidden; box-shadow: 10px 10px 0 var(--black); }
+.project-visual { position: relative; background: var(--orange); min-height: 380px; overflow: hidden; }
+.project-num { position: absolute; top: 10px; left: 24px; font-family: var(--font-head); font-weight: 900; font-size: 9rem; color: var(--black); line-height: 1; }
+.car { position: absolute; bottom: 50px; left: 12%; width: 120px; height: 56px; background: var(--lime); border: 4px solid var(--black); border-radius: 18px; transition: transform 0.6s; }
+.project:hover .car { transform: translateX(160px); }
+.stripes { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; background: repeating-linear-gradient(90deg, var(--black) 0 40px, var(--white) 40px 80px); }
+.project-info { padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; background: #fff; }
+.project-info h3 { font-size: 2rem; margin-bottom: 16px; }
+
+/* INTERESTS: flex-wrap word cloud */
+.interest-cloud { display: flex; flex-wrap: wrap; gap: 16px; }
+.interest-cloud li { font-family: var(--font-head); font-weight: 900; text-transform: uppercase; font-size: clamp(1.6rem, 4.5vw, 4rem); padding: 8px 32px; border: 4px solid var(--black); border-radius: 80px; transition: transform 0.3s, background 0.3s, color 0.3s; }
+.interest-cloud li:hover { background: var(--black); color: var(--lime); transform: scale(1.06) rotate(-2deg); }
+.i2 { background: var(--orange); } .i3 { background: var(--white); } .i4 { background: var(--cobalt); color: var(--white); } .i5 { background: var(--black); color: var(--white); }
+
+/* CONTACT: ID-based styling + decorative layer */
+#contact { background: var(--black); color: var(--white); position: relative; overflow: hidden; }
+.contact-links { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 40px; position: relative; z-index: 2; }
+.contact-art { position: absolute; right: -120px; bottom: -160px; width: 440px; height: 440px; border-radius: 50%; background: var(--orange); opacity: 0.9; }
+#contact .container { position: relative; z-index: 2; }
+
+/* 8. FOOTER */
+.footer { background: var(--orange); border-top: 2px solid var(--black); padding: 36px 0; font-weight: 600; }
+.footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+.footer a { text-decoration: underline; }
+.footer a:hover { color: var(--white); }
+
+/* 9. RESPONSIVE */
+@media (max-width: 900px) {  /* tablet */
+  .hero-grid, .project, .edu-grid { grid-template-columns: 1fr; }
+  .hero-art { height: 340px; }
+  .split { flex-direction: column; }
+  .section { padding: 80px 0; }
+}
+@media (max-width: 700px) {  /* mobile: hamburger menu */
+  .menu-btn { display: flex; flex-direction: column; justify-content: center; width: 40px; height: 40px; cursor: pointer; }
+  .menu-btn span, .menu-btn span::before { content: ""; display: block; width: 28px; height: 3px; background: var(--black); }
+  .menu-btn span::before { margin-top: 9px; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--white); padding: 20px; border-bottom: 2px solid var(--black); gap: 16px; }
+  .menu-toggle:checked ~ .nav-links { display: flex; }
+  .hero-art { height: 280px; }
+  .circle { width: 180px; height: 180px; }
+  .square { width: 130px; height: 130px; }
+  .pill { width: 170px; height: 56px; }
+  .project-num { font-size: 6rem; }
+  .project-info, .edu-card { padding: 28px; }
+  .contact-art { width: 260px; height: 260px; right: -80px; bottom: -100px; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- 1. NAVIGATION (sticky) -->
+  <header id="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="#home" class="logo">MJ<span>.</span></a>
+      <!-- Checkbox hack: mobile menu works with pure CSS, no JavaScript -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="menu-btn" aria-label="Open menu"><span></span></label>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 2. HERO -->
+    <section id="home" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="eyebrow">BBA DBE Student | IIM Bangalore | Aspiring Entrepreneur</p>
+          <h1 class="mega">THINK BIG.<br><span class="hl-orange">BUILD</span> <span class="hl-lime">BOLD.</span></h1>
+          <h2 class="hero-name">MIHIR JAGTAP</h2>
+          <p class="lead">Exploring the intersection of business, technology and entrepreneurship. Curious by nature, driven by ideas.</p>
+          <a href="#about" class="btn btn-dark">Explore My Journey &rarr;</a>
+        </div>
+        <!-- Original abstract graphic built only with CSS shapes -->
+        <div class="hero-art" aria-hidden="true">
+          <div class="shape circle"></div>
+          <div class="shape square"></div>
+          <div class="shape pill"></div>
+          <div class="shape ring"></div>
+          <span class="art-word">2026</span>
+        </div>
+      </div>
+      <div class="marquee" aria-hidden="true">
+        <p>ENTREPRENEURSHIP &bull; DIGITAL BUSINESS &bull; INNOVATION &bull; TECHNOLOGY &bull; PROBLEM SOLVING &bull; ENTREPRENEURSHIP &bull; DIGITAL BUSINESS &bull; INNOVATION &bull;</p>
+      </div>
+    </section>
+
+    <!-- 3. ABOUT: split screen -->
+    <section id="about" class="split">
+      <div class="split-left">
+        <h2 class="big">MORE THAN JUST A <span class="hl-orange">STUDENT.</span></h2>
+      </div>
+      <div class="split-right">
+        <p class="eyebrow">About me</p>
+        <p>I am Mihir Jagtap, a student pursuing the Bachelor of Business Administration in Digital Business and Entrepreneurship at IIM Bangalore. I am enthusiastic about entrepreneurship and interested in understanding how ideas, technology and business can come together to solve real-world problems.</p>
+        <p>I believe in continuous learning, experimentation and building practical skills.</p>
+      </div>
+    </section>
+
+    <!-- 4. EDUCATION -->
+    <section id="education" class="section">
+      <div class="container">
+        <h2 class="big">THE <span class="hl-cobalt">FOUNDATION.</span></h2>
+        <div class="edu-grid">
+          <article class="edu-card edu-main">
+            <span class="tag">Joined 2026</span>
+            <h3>BBA in Digital Business and Entrepreneurship</h3>
+            <p>Indian Institute of Management Bangalore</p>
+          </article>
+          <article class="edu-card">
+            <span class="tag">Class 12</span>
+            <h3>Science Stream</h3>
+            <p>Maharashtra State Board</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SKILLS -->
+    <section id="skills" class="section section-dark">
+      <div class="container">
+        <h2 class="big">CURRENTLY <span class="hl-lime">BUILDING.</span></h2>
+        <ul class="skill-grid">
+          <li class="skill-card"><span class="num">01</span><h3>C Programming</h3><p>Basic knowledge</p></li>
+          <li class="skill-card"><span class="num">02</span><h3>Python</h3><p>Basic knowledge</p></li>
+          <li class="skill-card"><span class="num">03</span><h3>Entrepreneurial Thinking</h3></li>
+          <li class="skill-card"><span class="num">04</span><h3>Problem Identification</h3></li>
+          <li class="skill-card"><span class="num">05</span><h3>Continuous Learning</h3></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. PROJECTS -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="big">IDEAS INTO <span class="hl-orange">ACTION.</span></h2>
+        <article class="project">
+          <div class="project-visual" aria-hidden="true">
+            <span class="project-num">01</span>
+            <div class="car"></div>
+            <div class="stripes"></div>
+          </div>
+          <div class="project-info">
+            <p class="eyebrow">Featured college project</p>
+            <h3>Campus Parking Problem Project</h3>
+            <p>A college project focused on understanding and addressing parking-related problems through a practical concept.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7. INTERESTS -->
+    <section id="interests" class="section section-lime">
+      <div class="container">
+        <h2 class="big">WHAT <span class="hl-white">DRIVES ME.</span></h2>
+        <ul class="interest-cloud">
+          <li class="i1">Entrepreneurship</li>
+          <li class="i2">Digital Business</li>
+          <li class="i3">Innovation</li>
+          <li class="i4">Technology</li>
+          <li class="i5">Problem Solving</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. CONTACT -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <h2 class="mega">LET'S MAKE SOMETHING <span class="hl-lime">HAPPEN.</span></h2>
+        <div class="contact-links">
+          <a class="btn btn-lime" href="mailto:mihir.jagtap26@iimb.ac.in">mihir.jagtap26@iimb.ac.in</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/mihir-jagtap-784014418/" target="_blank" rel="noopener">LinkedIn &nearr;</a>
+        </div>
+        <div class="contact-art" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 9. FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <strong>Mihir Jagtap</strong>
+        <p>BBA DBE Student, IIM Bangalore</p>
+      </div>
+      <div>
+        <a href="mailto:mihir.jagtap26@iimb.ac.in">mihir.jagtap26@iimb.ac.in</a><br>
+        <a href="https://www.linkedin.com/in/mihir-jagtap-784014418/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p>&copy; 2026 Mihir Jagtap</p>
+    </div>
+  </footer>
+
+</body>
+</html>
